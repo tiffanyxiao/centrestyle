@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Centre Style</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+  <link href="https://s3.amazonaws.com/codiqa-cdn/codiqa.ext.css" rel="stylesheet">
+  <link href="https://s3.amazonaws.com/codiqa-cdn/mobile/1.4.2/jquery.mobile-1.4.2.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="https://s3.amazonaws.com/codiqa-cdn/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+  <script src="https://s3.amazonaws.com/codiqa-cdn/codiqa.ext.js"></script>
+  <script src="sundress.css"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+<div data-role="page" data-control-title="Home" id="Home">
+    <div data-theme="a" data-role="header">
+        <h1 class="ui-title">
+            Sun Dress
+        </h1>
+    </div>
+    <div role="main" class="ui-content">
+        <div style="width: 288px; height: 200px; position: relative; background-color: #fbfbfb; border: 1px solid #b8b8b8;"
+        data-controltype="image">
+            <img src="https://codiqa.com/static/images/v2/image.png" alt="image" style="position: absolute; top: 50%; left: 50%; margin-left: -16px; margin-top: -18px">
+        </div>
+        <a href="#Quiz" class="ui-btn ">
+            Get Me Dressed!
+        </a>
+    </div>
+</div>
+<div data-role="page" data-control-title="Quiz" id="Quiz">
+    <div data-theme="a" data-role="header">
+        <h1 class="ui-title">
+            Sun Dress
+        </h1>
+    </div>
+    <div role="main" class="ui-content">
+        <div data-controltype="textblock">
+            <p style="text-align: center;">
+                Tell Us About Yourself!
+            </p>
+        </div>
+        <div class="ui-field-contain" data-controltype="selectmenu">
+            <label for="selectmenu1">
+                Are you a ...
+            </label>
+            <select id="gender" name="">
+                <option value="boy">
+                    Boy
+                </option>
+                <option value="girl">
+                    Girl
+                </option>
+            </select>
+        </div>
+		<a href="#home" class="ui-btn" onclick="temperature();">
+            Submit
+        </a>
+    </div>
+    </div>
+</div>
+<div data-role="page" data-control-title="Results" id="Results">
+    <div data-theme="a" data-role="header">
+        <h1 class="ui-title">
+            Sun Dress
+        </h1>
+    </div>
+    <div role="main" class="ui-content">
+        <div data-controltype="textblock">
+            <p style="text-align: center;">
+                <b>
+                    Today's temperature is
+                </b>
+            </p>
+            <p id="temp">
+            </p>
+        </div>
+        <div data-controltype="textblock">
+            <p style="text-align: center;">
+                <b>
+                    We suggest wearing...
+                </b>
+            </p>
+        </div>
+        <img src="shorts.png" alt="shorts" style="width:300px;height:300px;center;">
+        <img src="shortsleeve.jpg" alt="shortsleeve" style="width:300px;height:300px;center;">
+    </div>
+</div>
+</body>
+</html>
