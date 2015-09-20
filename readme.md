@@ -1,1 +1,2 @@
-Location-based social style-sharing application
+Location-based clothes shopping and outfit styling recommendation web app for travelers
+
