@@ -1,6 +1,350 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
+  <meta charset="utf-8">
+  <title>Connections</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+  <link href="https://s3.amazonaws.com/codiqa-cdn/codiqa.ext.css" rel="stylesheet">
+  <link href="https://s3.amazonaws.com/codiqa-cdn/mobile/1.4.2/jquery.mobile-1.4.2.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="https://s3.amazonaws.com/codiqa-cdn/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+  <script src="https://s3.amazonaws.com/codiqa-cdn/codiqa.ext.js"></script>
+  <script src="theme.css"></script>
+  <script src="script.js"></script>
+
+<link rel="icon" type="image/png" href="connections.png" sizes="32x15" />
+<link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+<script src="http://js.arcgis.com/3.14/"></script>
+    
+</head>
+<body id="pages">
+<!-- New Landing Page -->
+<div data-role="page" data-control-title="Landing" id="landing">
+	<div data-role="header" data-theme="b">
+	<h1>Centre Style</h1>
+	</div>
+	<div role="main" class="ui-content">
+		<h2 class="mc-text-center">Welcome to Centre Style!</h2>
+		<p class="mc-top-margin-1-5"><b>Existing Users</b></p>
+		<!-- sign in button -->
+		<a href="#login" class="ui-btn ui-btn-b ui-corner-all">Sign In</a>
+		<p class="mc-top-margin-1-5"><b>Don't have an account?</b></p>
+		<!-- sign up button -->
+		<a href="#signup" class="ui-btn ui-btn-b ui-corner-all">Sign Up</a>
+		<p></p>
+	</div>
+	<div style="text-align: center"><img src="Connections.png" width="100" /></div>  
+</div>
+<!-- Login Page -->
+<div data-role="page" data-control-title="Login" id="login">
+    <div data-theme="a" data-role="header">
+    <h1>Centre Style</h1>
+    </div>
+    <div role="main" class="ui-content">
+            <h3>Sign In</h3>
+            <label for="txt-email">Email Address</label>
+            <input type="text" name="txt-email" id="txt-email" value="">
+            <label for="txt-password">Password</label>
+            <input type="password" name="txt-password" id="txt-password" value="">
+            <fieldset data-role="controlgroup">
+            <input type="checkbox" name="chck-rememberme" id="chck-rememberme" checked="">
+            <label for="chck-rememberme">Remember me</label>
+            </fieldset>
+            <a href="#dlg-invalid-credentials" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" onclick="return checkSignin()">Submit</a>
+
+            <p class="mc-top-margin-1-5"><a href="#pwreset">Can't access your account?</a></p>
+            <div data-role="popup" id="dlg-invalid-credentials" data-dismissible="false" style="max-width:400px;">
+            <div role="main" class="ui-content">
+            <h3 class="mc-text-danger">Login Failed</h3>
+            <p>Sorry, incorrect username or password.</p>
+            <div class="mc-text-center"><a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+                </div>
+            </div>
+    </div>
+</div>
+<!-- Signup -->
+<div data-role="page" data-control-title="Sign In" id="signup">
+    <div data-theme="a" data-role="header">
+        <h1>
+            Centre Style
+        </h1>
+    </div>
+    <div role="main" class="ui-content">
+<h3>Sign Up</h3>
+        <label for="txt-first-name">First Name</label>
+        <input type="text" name="txt-first-name" id="txt-first-name" value="">
+        <label for="txt-last-name">Last Name</label>
+        <input type="text" name="txt-last-name" id="txt-last-name" value="">
+        <label for="txt-email">Email Address</label>
+        <input type="text" name="txt-email" id="txt-emailUP" value="">
+        <label for="txt-password">Password</label>
+        <input type="password" name="txt-password" id="txt-passwordUP" value="">
+        <label for="txt-password-confirm">Confirm Password</label>
+        <input type="password" name="txt-password-confirm" id="txt-password-confirm" value="">
+        <a href="#dlg-sign-up-sent" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5" onclick= "saveSignup()">Submit</a>
+        <div data-role="popup" id="dlg-sign-up-sent" data-dismissible="false" style="max-width:400px;">
+            <div data-role="header">
+                <h1>Almost done...</h1>
+            </div>
+            <div role="main" class="ui-content">
+                <h3>Confirm Your Email Address</h3>
+                <p>We sent you an email with instructions on how to confirm your email address. Please check your inbox and follow the instructions in the email.</p>
+                <div class="mc-text-center"><a href="#login" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Password Reset -->
+<div data-role="page" data-control-title="Password Reset" id="pwreset">
+	<div data theme="a" data-role="header">
+	<h1> Centre Style</h1>
+	</div>
+	<div role="main" class="ui-content">
+	<h3>Password Reset</h3>
+            <label for="txt-email">Enter your email address</label>
+            <input type="text" name="txt-email" id="txt-email" value="">
+            <a href="#dlg-pwd-reset-sent" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Submit</a>
+            <div data-role="popup" id="dlg-pwd-reset-sent" data-dismissible="false" style="max-width:400px;">
+                <div data-role="header">
+                    <h1>Password Reset</h1>
+                </div>
+                <div role="main" class="ui-content">
+                    <h3>Check Your Inbox</h3>
+                    <p>We sent you an email with instructions on how to reset your password. Please check your inbox and follow the instructions in the email.</p>
+                    <div class="mc-text-center"><a href="#endpwreset" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+                </div>
+            </div>
+</div>
+</div>
+<!--End Password Reset-->
+<div data-role="page" data-control-title="End Password Reset" id="endpwreset">
+	<div data theme="a" data-role="header">
+	<h1> Centre Style</h1>
+	</div>
+	<div role="main" class="ui-content">
+	<h3>Reset Password</h3>
+            <label for="txt-tmp-password">Provisional Password</label>
+            <input type="password" name="txt-tmp-password" id="txt-tmp-password" value="">
+            <label for="txt-new-password">New Password</label>
+            <input type="password" name="txt-new-password" id="txt-new-password" value="">
+            <label for="txt-new-password-confirm">Confirm New Password</label>
+            <input type="password" name="txt-new-password-confirm" id="txt-new-password-confirm" value="">
+            <a href="#dlg-pwd-changed" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Submit</a>
+            <div data-role="popup" id="dlg-pwd-changed" data-dismissible="false" style="max-width:400px;">
+                <div data-role="header">
+                    <h1>Done</h1>
+                </div>
+                <div role="main" class="ui-content">
+                    <p>Your password was changed.</p>
+                    <div class="mc-text-center"><a href="#login" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+                </div>
+            </div>
+	</div>
+</div>
+<!-- Home -->
+<div data-role="page" data-control-title="Home" id="home">
+    <div data-theme="a" data-role="header">
+        <h1 class="ui-title">
+            Centre Style
+        </h1>
+    </div>
+    <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li>
+                    <a href="#friends" data-transition="fade" data-theme="c" data-icon="" onclick="sortfriendList()">
+                        Outfits
+                    </a>
+                </li>
+                <li>
+                    <a href="#family" data-transition="fade" data-theme="c" data-icon="" onclick="sortfamilyList()">
+                        Style
+                    </a>
+                </li>
+                <li>
+                    <a href="#colleagues" data-transition="fade" data-theme="c" data-icon="" onclick="sortcolleagueList()">
+                        Find
+                    </a>
+                </li>
+            </ul>
+        </div>
+    <div role="main" class="ui-content" id="my-list">
+    <!-- data-inset="false" to remove button corners -->
+        <ul class="alphaList" data-role="listview" id ="contactList" data-divider-theme="a" data-inset="true" data-filter="true" data-filter-placeholder="Search Friends..." >                                
+        </ul>
+    </div>    
+    <div data-role="tabbar" data-iconpos="top" data-theme="a">
+        <ul>
+            <li>
+                <a href="#about" data-transition="fade" data-theme="" data-icon="info">
+                    Maps
+                </a>
+            </li>
+            <li>
+                <a href="#home" data-transition="fade" data-theme="" data-icon="home">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="#page4" data-transition="fade" data-theme="" data-icon="plus">
+                    Friends
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Adding page -->
+<div data-role="page" data-control-title="Add" id="page4">
+    <div data-theme="a" data-role="header">
+        <h1 class="ui-title">
+            Add a Contact
+        </h1>
+        <a href="#home" data-icon="arrow-l" data-iconpos="left" class="ui-btn ui-btn-left ui-icon-arrow-l ui-btn-icon-left">
+            Back
+        </a>           
+    </div>
+    <div role="main" class="ui-content">
+        <div class="ui-field-contain" data-controltype="textinput">
+            <label for="textinput1">
+                First Name:
+            </label>
+            <input name="" id="textinput1" placeholder="Type First Name Here"
+            type="text">
+        </div>
+        <div class="ui-field-contain" data-controltype="textinput">
+            <label for="textinput6">
+                Last Name:
+            </label>
+            <input name="" id="textinput6" placeholder="Type Last Name Here"
+            type="text">
+        </div>
+        <div class="ui-field-contain" data-controltype="textinput">
+            <label for="textinput2">
+                Phone:
+            </label>
+            <input name="" id="textinput2" placeholder="" value="Phone" type="tel">
+        </div>
+        <div class="ui-field-contain" data-controltype="textinput">
+            <label for="textinput5">
+                Email:
+            </label>
+            <input name="" id="textinput5" placeholder="" value="Email" type="email">
+        </div>
+        <div class="ui-field-contain" data-controltype="textarea">
+            <label for="textarea1">
+                Notes
+            </label>
+            <textarea name="" id="textarea1" placeholder="Enter notes about contact here"></textarea>
+        </div>   
+        <div class="ui-field-contain" data-controltype="selectmenu">
+            <label for="selectmenu3">
+                Add to a group:
+            </label>
+            <select id="groups" name="" data-theme="c">
+                <option value="main">
+                    None (Main Only)
+                </option>
+                <option value="friends">
+                    Friends
+                </option>
+                <option value="family">
+                    Family
+                </option>
+                <option value="colleagues">
+                    Colleagues
+                </option>
+            </select>
+        </div>             
+        <a href="#home" class="ui-btn" onclick="addContact();group();sortList();saveContact();">
+            Submit
+        </a>
+    </div>
+</div>
+<!-- History -->
+<div data-role="page" data-control-title="History" id="history">
+    <div data-theme="a" data-role="header"> <!--div2-->
+        <h1 class="ui-title">
+            CONNECTIONS
+        </h1>
+        <a href="#home" data-icon="arrow-l" data-iconpos="left" class="ui-btn ui-btn-left ui-icon-arrow-l ui-btn-icon-left">
+            Back
+        </a>                
+    </div>
+    <div role="main" class="ui-content"> <!--div3-->
+        <div data-controltype="textblock"> <!--div4-->
+            <p id="breaks">
+                <b>
+                    Name
+                </b>
+                <p>
+                    Email
+                </p>
+                <p>
+                    Phone
+                </p>
+                <p>
+                    Notes
+                </p>        
+            </p>
+        </div> <!--div4-->
+        <div class="ui-field-contain" data-controltype="selectmenu"> <!--div5-->
+            <label for="selectmenu1">
+                Connection Type:
+            </label>
+            <select id="options" name="" data-theme="a">
+                <option value="call">
+                    Call
+                </option>
+                <option value="email">
+                    Email
+                </option>
+                <option value="message">
+                    Message
+                </option>
+            </select>
+        </div>
+                <input type= "button" value="Submit" data-theme="a" onclick="updateHistory()">  
+        </div>
+        <div role="main" class="ui-content"> <!--div 6-->
+            <div data-controltype="textblock"> <!--div 7-->
+                <p>
+                    History
+                    <p id="lines">
+                    </p>
+                </p>
+            </div>
+        </div>  
+</div>
+<!--Notes -->
+<div data-role="page" data-control-title="Notes" id="page6">
+    <div data-theme="a" data-role="header">
+        <h1 class="ui-title">
+            CONNECTIONS
+        </h1>
+    </div>
+    <div role="main" class="ui-content">
+        <div class="ui-field-contain" data-controltype="textarea">
+            <label for="textarea1">
+                Notes:
+            </label>
+            <textarea name="" id="textarea1" placeholder="">Enter notes about the connection here!</textarea>
+        </div>
+        <div class="ui-field-contain" data-controltype="dateinput">
+            <label for="dateinput2">
+                Date:
+            </label>
+            <input name="" id="dateinput2" placeholder="" value="" type="date">
+        </div>
+        <input type="submit" value="Submit">
+    </div>
+</div>-->
+<!--Maps page-->
+<div data-role="page" data-control-title="Maps" id="about">
+     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <title>SimpleMarkerSymbol with SVG Path - Simplified</title>
@@ -81,4 +425,6 @@
     <div id="map"></div>
     <div id="picker1"></div>
   </body>
+</div>
+</body>
 </html>
